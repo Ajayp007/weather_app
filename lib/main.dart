@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:weather_app/screen/home/provider/home_provider.dart';
 import 'package:weather_app/utils/app_routes.dart';
 import 'package:weather_app/utils/app_theme.dart';
 import 'package:weather_app/utils/theme_provider.dart';
@@ -10,6 +11,9 @@ void main() {
       providers: [
         ChangeNotifierProvider.value(
           value: ThemeProvider(),
+        ),
+        ChangeNotifierProvider.value(
+          value: HomeProvider(),
         ),
       ],
       child: Consumer<ThemeProvider>(

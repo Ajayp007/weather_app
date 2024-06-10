@@ -5,7 +5,8 @@ class ThemeProvider with ChangeNotifier {
   bool themeMode = true;
 
   void setTheme() async {
-    themeMode = await getThemeData();
+    SharedHelper sharedHelper = SharedHelper();
+    themeMode = await sharedHelper.getThemeData();
     notifyListeners();
   }
 }
