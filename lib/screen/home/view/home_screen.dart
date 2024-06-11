@@ -165,10 +165,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       leading: const Icon(Icons.light_mode_outlined),
                       title: const Text("ThemeMode"),
                       trailing: Switch(
-                        value: providerW!.themeMode,
+                        value: providerW!.themeMode!,
                         onChanged: (value) {
-                          SharedHelper helper = SharedHelper();
-                          helper.setThemeData(value);
+                          setThemeData(value);
                           providerR!.setTheme();
                         },
                       ),
