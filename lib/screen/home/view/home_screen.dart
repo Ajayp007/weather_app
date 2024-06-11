@@ -39,48 +39,106 @@ class _HomeScreenState extends State<HomeScreen> {
         : Scaffold(
             appBar: AppBar(
               title: const Text("Weather"),
-              actions: [],
               centerTitle: true,
+              actions: [
+                IconButton(
+                  onPressed: () {
+                    providerRH!.bookmark!.add(txtSearch.text);
+
+                  },
+                  icon: const Icon(Icons.bookmark_add_outlined),
+                ),
+              ],
             ),
-            body: FutureBuilder(
-              future: providerWH!.model,
-              builder: (context, snapshot) {
-                if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                } else if (snapshot.hasData) {
-                  HomeModel? model = snapshot.data;
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: SearchBar(
-                          hintText: "Search",
-                          textInputAction: TextInputAction.search,
-                          keyboardType: TextInputType.text,
-                          trailing: [
-                            IconButton(
-                              onPressed: () {
-                                providerWH!.search(txtSearch.text);
-                                providerRH!.bookmark!.add(txtSearch.text);
-                              },
-                              icon: const Icon(Icons.search),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FutureBuilder(
+                  future: providerWH!.model,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    } else if (snapshot.hasData) {
+                      HomeModel? model = snapshot.data;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(12),
+                            child: SearchBar(
+                              hintText: "Search",
+                              textInputAction: TextInputAction.search,
+                              keyboardType: TextInputType.text,
+                              trailing: [
+                                IconButton(
+                                  onPressed: () {
+                                    providerWH!.search(txtSearch.text);
+                                  },
+                                  icon: const Icon(Icons.search),
+                                ),
+                              ],
+                              controller: txtSearch,
                             ),
-                          ],
-                          controller: txtSearch,
-                        ),
-                      ),
-                      Text("${model!.name}"),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text("")
-                    ],
-                  );
-                }
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            height: 350,
+                            margin: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              image: const DecorationImage(
+                                  image: NetworkImage(
+                                      "https://img.freepik.com/premium-vector/too-hot-summer-character-heat-stroke-high-temperature-warning-hot-summer-day-vector_432516-2737.jpg"),
+                                  fit: BoxFit.cover),
+                            ),
+                          ),
+                          Text(
+                            "${model!.name}",
+                            style: const TextStyle(fontSize: 28),
+                          ),
+                          Text(
+                            "${model.weather![0].description}",
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "${model.mainModel!.temp}°",
+                                style: const TextStyle(
+                                    fontSize: 40, fontWeight: FontWeight.bold),
+                              ),
+                              Text("H:${model.mainModel!.humidity}°"),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Center(
+                            child: InkWell(  onTap: (){},
+                              child: Container(
+                                height: 70,
+                                alignment: Alignment.center,
+                                width: MediaQuery.sizeOf(context).width*0.9,
+                                decoration: BoxDecoration(border: Border.all(),borderRadius: BorderRadius.circular(12),),
+                                child: const Text("More About ->"),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                ),
+              ),
             ),
             drawer: Drawer(
               child: Padding(

@@ -72,8 +72,8 @@ class WeatherModel {
 }
 
 class MainModel {
-  double? temp, feels_like, temp_min, temp_max;
-  int? pressure, humidity, sea_level, grnd_level;
+  double? temp,  temp_min, temp_max;
+  int? pressure, humidity, sea_level, grnd_level,feels_like;
 
   MainModel(
       {this.temp,

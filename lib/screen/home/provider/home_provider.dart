@@ -9,7 +9,7 @@ class HomeProvider with ChangeNotifier {
 
   Connectivity connectivity = Connectivity();
   bool? isInternet;
-  String searchCity = "junagadh";
+  String searchCity = "surat";
 
   List<String?>? bookmark = [];
 

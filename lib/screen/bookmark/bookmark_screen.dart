@@ -12,7 +12,6 @@ class BookmarkScreen extends StatefulWidget {
 }
 
 class _BookmarkScreenState extends State<BookmarkScreen> {
-
   HomeProvider? providerW;
   HomeProvider? providerR;
   HomeModel? model;
@@ -38,7 +37,6 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
                   const Text(
                     "My Cities",
                     style: TextStyle(fontSize: 22),
@@ -61,9 +59,9 @@ class _BookmarkScreenState extends State<BookmarkScreen> {
                           ),
                           child: Row(
                             children: [
-                               Text("${providerR!.bookmark![index]}"),
+                              Text("${providerR!.bookmark![index]}"),
                               const Spacer(),
-                               Text(
+                              Text(
                                 "${model!.mainModel!.temp}°",
                                 style: const TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold),
