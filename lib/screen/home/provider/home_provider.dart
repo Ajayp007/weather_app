@@ -21,13 +21,13 @@ class HomeProvider with ChangeNotifier {
   }
 
   Future<void> getBookmark() async {
-    SharedHelper sharedHelper = SharedHelper();
-    List<String> bookmarkData = await sharedHelper.getBookmarkData();
+
+    List<String>? bookmarkData = await getBookmarkData();
     if (bookmarkData != null) {
       bookmarkData.addAll(
         [searchCity],
       );
-      sharedHelper.setBookmarkData(bookmarkData);
+    setBookmarkData(bookmarkData);
       notifyListeners();
     }
   }
